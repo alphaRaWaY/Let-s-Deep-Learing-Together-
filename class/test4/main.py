@@ -1,44 +1,80 @@
-import time
-import numpy as np
 import os
+import numpy as np
+# 屏蔽 TensorFlow 底层警告日志
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import tensorflow as tf
+from keras.datasets import mnist
 from keras.models import Sequential
-from keras.layers import Dense, Input
+from keras.layers import Dense, Activation
 from keras.utils import to_categorical
 
-# 数据处理
-with np.load('data/mnist.npz') as f:
-    xtr, ytr = f['x_train'], f['y_train']
-    xte, yte = f['x_test'], f['y_test']
+# 数据预处理
 
-xtr = xtr.reshape(-1, 784).astype('float32') / 255.0
-xte = xte.reshape(-1, 784).astype('float32') / 255.0
-ytr, yte = to_categorical(ytr, 10), to_categorical(yte, 10)
+# 加载训练集和测试集
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+print(X_train.shape)
+print(y_train.shape)
+print(X_test.shape)
+print(y_test.shape)
+
+# 重塑训练集和测试集的形状
+X_train = X_train.reshape(60000, 784).astype('float32')
+X_test = X_test.reshape(10000, 784).astype('float32')
+print(X_train.shape)
+print(X_test.shape)
+print(X_train.dtype)
+print(X_test.dtype)
+
+# 归一化
+X_train /= 255
+X_test /= 255
+# 查看X_train的第2个例子的第100个到150个像素点的值
+print(X_train[1, 100:151]) 
+
+# one-hot编码
+Y_train = to_categorical(y_train, 10)
+Y_test = to_categorical(y_test, 10)
+print(Y_train[:5])
 
 # 简单感知机
-m1 = Sequential([Input(shape=(784,)), Dense(10, activation='softmax')])
-m1.compile(loss='crossentropy', optimizer='sgd', metrics=['accuracy'])
+model = Sequential()
+# 添加全连接层，输出10，输入784
+model.add(Dense(10, input_shape=(784,)))
+# 添加激活层
+model.add(Activation('softmax'))
+# 查看模型摘要
+model.summary()
 
-t0 = time.time()
-m1.fit(xtr, ytr, batch_size=128, epochs=200, verbose=0)
-t1 = time.time()
-acc1 = m1.evaluate(xte, yte, verbose=0)[1]
+# 编译神经网络
+model.compile(loss='categorical_crossentropy', optimizer='SGD', metrics=['accuracy'])
 
-# 深度多层感知器 
-m2 = Sequential([
-    Input(shape=(784,)),
-    Dense(128, activation='relu'),
-    Dense(128, activation='relu'),
-    Dense(10, activation='softmax')
-])
-m2.compile(loss='crossentropy', optimizer='sgd', metrics=['accuracy'])
+# 训练神经网络
+model.fit(X_train, Y_train, batch_size=128, epochs=200, verbose=1, validation_split=0.2)
 
-t2 = time.time()
-m2.fit(xtr, ytr, batch_size=128, epochs=20, verbose=0)
-t3 = time.time()
-acc2 = m2.evaluate(xte, yte, verbose=0)[1]
+# 评估神经网络
+score = model.evaluate(X_test, Y_test, verbose=1)
+print(f"Test score {score[0]}")
+print(f"Test accuracy {score[1]}")
 
-# 结果比较
-print(f"简单感知机          Acc: {acc1:.4f} | Time: {t1-t0:.2f}s (200 Epochs)")
-print(f"深度多层感知器       Acc: {acc2:.4f} | Time: {t3-t2:.2f}s (20 Epochs)")
+# 更好的模型：增加隐藏层
+# 模型改进
+model = Sequential()
+# 隐藏层：输出128，激活relu
+model.add(Dense(128, input_shape=(784,), activation='relu'))
+# 再加一个隐藏层
+model.add(Dense(128, activation='relu'))
+# 输出层：输出10，激活softmax
+model.add(Dense(10, activation='softmax'))
+model.summary()
+
+# 编译神经网络
+model.compile(loss='categorical_crossentropy', optimizer='SGD', metrics=['accuracy'])
+
+# 训练神经网络
+model.fit(X_train, Y_train, batch_size=128, epochs=20, verbose=1, validation_split=0.2)
+
+# 评估神经网络
+score = model.evaluate(X_test, Y_test, verbose=1)
+print(f"Test score: {score[0]}")
+print(f"Test accuracy: {score[1]}")
