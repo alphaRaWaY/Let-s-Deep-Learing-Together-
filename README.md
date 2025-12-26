@@ -6,6 +6,8 @@
 
 一起学习愉快 Ciallo～(∠・ω< )⌒☆
 
+![de44dbebf7dc722ba35f1c68e1ca340b](https://github.com/user-attachments/assets/9a510483-8532-4312-ac84-f3a7f3c93be7)
+
 ## part1：《动手学深度学习》
 > 本部分笔记全部基于知名深度学习教材[《动手学深度学习》](https://zh.d2l.ai/)
 >
