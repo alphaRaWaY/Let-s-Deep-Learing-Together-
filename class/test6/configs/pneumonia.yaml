@@ -1,0 +1,17 @@
+# 图像处理配置
+image_processing:
+  size: 128
+  noise_factor: 0.1
+
+# 训练超参数
+train_params:
+  batch_size: 16
+  lr: 0.001
+  ae_epochs: 5
+  cnn_epochs: 10
+
+# 路径配置
+paths:
+  train_data: "data/train"
+  test_data: "data/noisy_test"
+  model_save_path: "models/"

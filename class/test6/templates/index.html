@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>肺炎医疗影像辅助诊断系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pneumonia Detection System</h1>
+            <p>基于卷积自编码器(DAE)与CNN的影像识别</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <input type="file" id="imageInput" accept="image/*" hidden>
+                <div class="drop-zone" onclick="document.getElementById('imageInput').click()">
+                    <p id="prompt">点击或拖拽上传 X 光片</p>
+                    <img id="preview" src="#" alt="预览图" style="display:none;">
+                </div>
+                <button id="uploadBtn" disabled>开始智能检测</button>
+            </div>
+
+            <div id="resultCard" class="result-card" style="display:none;">
+                <h3>诊断结果</h3>
+                <div id="prediction" class="prediction-text">--</div>
+                <div class="info">注：本结果仅供科研参考，不作为临床诊断依据。</div>
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

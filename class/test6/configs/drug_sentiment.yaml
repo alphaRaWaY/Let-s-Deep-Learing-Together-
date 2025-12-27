@@ -1,0 +1,14 @@
+data:
+  train_path: "data/drugsComTrain_raw.csv"
+  test_path: "data/drugsComTest_raw.csv"
+
+model_params:
+  max_words: 10000      # 词汇表大小
+  max_len: 200          # 每条评论的最大长度
+  embedding_dim: 128    # 词向量维度
+  lstm_units: 64        # LSTM 神经元数量
+
+train_params:
+  batch_size: 64
+  epochs: 5             # CPU 运行建议 3-5 轮
+  learning_rate: 0.001

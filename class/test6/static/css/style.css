@@ -1,0 +1,10 @@
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f9; color: #333; margin: 0; display: flex; justify-content: center; }
+.container { width: 100%; max-width: 800px; padding: 40px; }
+header { text-align: center; margin-bottom: 40px; }
+.drop-zone { border: 2px dashed #3498db; border-radius: 15px; padding: 40px; text-align: center; cursor: pointer; background: white; transition: 0.3s; }
+.drop-zone:hover { background: #ebf5fb; }
+#preview { max-width: 100%; max-height: 300px; border-radius: 10px; margin-top: 10px; }
+#uploadBtn { display: block; width: 100%; margin-top: 20px; padding: 15px; background: #3498db; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
+#uploadBtn:disabled { background: #ccc; }
+.result-card { margin-top: 30px; padding: 25px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+.prediction-text { font-size: 24px; font-weight: bold; color: #e74c3c; margin: 15px 0; }

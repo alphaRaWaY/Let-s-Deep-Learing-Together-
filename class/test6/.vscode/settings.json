@@ -1,0 +1,7 @@
+{
+    "python.defaultInterpreterPath": "/home/alpha/anaconda3/envs/CSU_SE_MLnote/bin/python",
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/src"
+    ]
+}
