@@ -4,10 +4,10 @@ import numpy as np
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 import tensorflow as tf
-from keras.datasets import mnist
-from keras.models import Sequential
-from keras.layers import Dense, Activation
-from keras.utils import to_categorical
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Activation
+from tensorflow.keras.utils import to_categorical
 
 # 数据预处理
 

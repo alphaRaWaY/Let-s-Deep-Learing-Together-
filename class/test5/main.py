@@ -7,10 +7,14 @@ import numpy as np
 import math
 
 # 1.1.2 导入相关包
-from keras.models import Sequential, Model, load_model
-from keras.layers import InputLayer, Input, Reshape, MaxPooling2D, Conv2D, Dense, Flatten
-from keras.optimizers import Adam
-from keras import backend as K
+from tensorflow.keras.models import Sequential, Model, load_model
+from tensorflow.keras.layers import (
+    InputLayer, Input, Reshape,
+    MaxPooling2D, Conv2D, Dense, Flatten
+)
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras import backend as K
+
 
 # 1.2 载入数据
 def load_local_mnist(path):
@@ -19,7 +23,10 @@ def load_local_mnist(path):
         x_test, y_test = f['x_test'], f['y_test']
     return (x_train, y_train), (x_test, y_test)
 
-(x_train_raw, y_train_raw), (x_test_raw, y_test_raw) = load_local_mnist('data/mnist.npz')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(BASE_DIR, "data", "mnist.npz")
+
+(x_train_raw, y_train_raw), (x_test_raw, y_test_raw) = load_local_mnist(DATA_PATH)
 
 class DataWrapper:
     def __init__(self, x_train, y_train, x_test, y_test):
