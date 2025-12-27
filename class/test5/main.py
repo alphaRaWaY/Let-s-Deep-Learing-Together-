@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 import matplotlib.pyplot as plt
 import tensorflow as tf
 import numpy as np

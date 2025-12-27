@@ -2,6 +2,8 @@ import os
 import numpy as np
 # 屏蔽 TensorFlow 底层警告日志
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 import tensorflow as tf
 from tensorflow.keras.datasets import mnist
